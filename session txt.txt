@@ -1,0 +1,73 @@
+// return the user data from the session storage
+ const getUser = () => {
+  const userStr = sessionStorage.getItem('user');
+  if (userStr) return JSON.parse(userStr);
+  else return null;
+}
+
+// return the token from the session storage
+ const getToken = () => {
+  return sessionStorage.getItem('token') || null;
+}
+
+// remove the token and user from the session storage
+ const removeUserSession = () => {
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('user');
+}
+
+// set the token and user from the session storage
+ const setUserSession = (token, user) => {
+  sessionStorage.setItem('token', token);
+  sessionStorage.setItem('user', JSON.stringify(user));
+}
+
+    attachments: [{
+      filename: myfile.txt,
+      path: '/path/to/file.txt'
+    }]
+
+
+
+
+
+
+
+
+
+
+const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await userModel.findOne({ email })
+  if (!user) {
+    // res.status(400).json('User not found')
+    throw Error('User not found')
+  }
+  try {
+    const resetCryptoToken = await user.createTokenCrypto();
+    const resetLink = `http://localhost:3000/users/forget/${resetCryptoToken}`
+    forMail(email, resetLink)
+    return res.status(200).json(resetLink);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const updatePassword = async (req, res) => {
+  try {
+    // const {token}=req.params
+    // console.log(token);
+    const { password,token } = req.body;
+    console.log(password);
+    const user = await userModel.findOne({ resetPassword: token })
+    console.log(user);
+    if (!user) {
+      // res.status(400).json('Invalid token')
+      throw Error('Invalid token')
+    }
+    await user.updatePassword(password);
+    return res.status(200).send(password);
+  } catch (error) {
+    console.log(error);
+  }
+}

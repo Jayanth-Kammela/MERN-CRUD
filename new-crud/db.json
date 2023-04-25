@@ -1,0 +1,18 @@
+{
+  "user": [
+    {
+      "name": "AppX",
+      "username": "Web App",
+      "email": "app@gmail.com",
+      "phone": "12345678",
+      "id": 1
+    },
+    {
+      "name": "Jayanth",
+      "username": "jayanth08",
+      "email": "app@ap.com",
+      "phone": "12345678",
+      "id": 2
+    }
+  ]
+}

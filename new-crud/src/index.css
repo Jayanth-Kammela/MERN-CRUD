@@ -1,0 +1,32 @@
+.table{
+    margin: 100px;
+}
+.edit{
+    margin: 100px;
+}
+.FormControl{
+    margin: 18px;
+}
+.FormGroup{
+    margin: 80px;
+}
+.link{
+    color: white;
+    text-decoration:none;
+    margin: 12px;
+}
+  .login{
+    margin-top: 200px;
+  }
+  #root{
+    font-family: 'Source Code Pro', monospace;
+  }
+/* .parent{
+  position: absolute;
+}
+.child{
+  position: relative;
+  top: -120px;
+
+} */
+  
