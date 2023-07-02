@@ -14,7 +14,6 @@ const initialValue = {
 const AddUser = () => {
 
     const [user, setUser] = useState(initialValue);
-    const { name, username, email, phone } = user;
 
     const nav = useNavigate();
 
@@ -34,20 +33,20 @@ const AddUser = () => {
                 <FormGroup className='FormGroup'>
                     <FormControl>
                         {/* <InputLabel>Name</InputLabel> */}
-                        <TextField onChange={(e) => forChange(e)} name="name" value={user.name} className='my-2' label="Name" color="secondary" />
+                        <TextField onChange={(e) => forChange(e)} name="name" className='my-2' label="Name" color="secondary" />
                         {/* <Input onChange={(e) => forChange(e)} name="name" value={user.name} className='FormControl' /> */}
                     </FormControl>
                     <FormControl>
                         {/* <InputLabel>User Name</InputLabel> */}
-                        <TextField onChange={(e) => forChange(e)} name="username" label='User Name' value={username} className='my-2' color="secondary" />
+                        <TextField onChange={(e) => forChange(e)} name="username" label='User Name' className='my-2' color="secondary" />
                     </FormControl>
                     <FormControl>
                         {/* <InputLabel>Email address</InputLabel> */}
-                        <TextField onChange={(e) => forChange(e)} name="email" label='Email address' value={email} className='my-2' color="secondary" />
+                        <TextField onChange={(e) => forChange(e)} name="email" label='Email address' className='my-2' color="secondary" />
                     </FormControl>
                     <FormControl>
                         {/* <InputLabel>Phone Number</InputLabel> */}
-                        <TextField onChange={(e) => forChange(e)} name="phone" label='Mobile Number' value={phone} className='my-2' color="secondary" />
+                        <TextField onChange={(e) => forChange(e)} name="phone" label='Mobile Number' className='my-2' color="secondary" />
                     </FormControl>
                     <Box my={3}>
                         <Button variant="contained" onClick={() => {forSubmit(),nav('/all')}} color="primary" align="center">Add User</Button>

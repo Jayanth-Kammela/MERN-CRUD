@@ -1,0 +1,83 @@
+.table {
+  margin: 100px;
+}
+
+.edit {
+  margin: 100px;
+}
+
+.FormControl {
+  margin: 18px;
+}
+
+.FormGroup {
+  margin: 80px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  margin: 12px;
+}
+
+.login {
+  margin-top: 200px;
+}
+
+#root {
+  font-family: 'Source Code Pro', monospace;
+}
+
+/* .parent{
+  position: absolute;
+}
+.child{
+  position: relative;
+  top: -120px;
+
+} */
+
+
+
+
+
+
+
+.spinner {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  border: 4.5px solid black;
+  border-radius: 50%;
+  border-color: #dbdcef black;
+  animation: spinner-e04l1k 1s infinite linear;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+}
+
+.spinner::before,
+.spinner::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2.2px;
+  border: inherit;
+  border-radius: 50%;
+}
+
+.spinner::before {
+  border-color: #474bff #0000;
+  animation: inherit;
+  animation-duration: 0.5s;
+  animation-direction: reverse;
+}
+
+.spinner::after {
+  margin: 8.9px;
+}
+
+@keyframes spinner-e04l1k {
+  100% {
+    transform: rotate(1turn);
+  }
+}

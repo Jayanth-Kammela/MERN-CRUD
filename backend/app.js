@@ -9,8 +9,6 @@ var todoRouter = require('./routes/todoRoute')
 var app = express();
 app.use(cors());
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +26,8 @@ mongoose.set('strictQuery', true);
 
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
+   mongoose.connect(process.env.MONGO_URI);
+   console.log('db connected');
 }
 main().catch(err => console.log(err));
 

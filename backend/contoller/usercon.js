@@ -6,7 +6,7 @@ const forMail = require('../forMail')
 
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1d" });
 };
 
 const forLogin = async (req, res) => {
@@ -24,9 +24,12 @@ const forLogin = async (req, res) => {
 const forSignup = async (req, res) => {
   const { email, password } = req.body;
 
+  // const salt=bycryt.salt(10)
+  // const hash=bycryt.hash(password,salt)
+
   try {
     const user = await userModel.signup(email, password);
-    res.status(200).json(user);
+    return res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -34,6 +37,7 @@ const forSignup = async (req, res) => {
 
 const forgetPassword = async (req, res) => {
   const { email } = req.body;
+  console.log(email);
   const user = await userModel.findOne({ email })
   if (!user) {
     // res.status(400).json('User not found')
@@ -42,8 +46,8 @@ const forgetPassword = async (req, res) => {
   try {
     const resetCryptoToken = await user.createTokenCrypto();
     const resetLink = `http://localhost:3000/users/forget/${resetCryptoToken}`
-    forMail(email, resetLink)
-    return res.status(200).json(resetLink);
+    await forMail(email, resetLink)
+    return res.status(200).json({ resetLink, resetCryptoToken });
   } catch (error) {
     console.log(error);
   }
@@ -51,14 +55,11 @@ const forgetPassword = async (req, res) => {
 
 const updatePassword = async (req, res) => {
   try {
-    // const {token}=req.params
+    const { token } = req.params
     // console.log(token);
-    const { password,token } = req.body;
-    console.log(password);
-    const user = await userModel.findOne({ resetPassword: token })
-    console.log(user);
+    const { password } = req.body;
+    const user = await userModel.findOne({ cryptoToken: token })
     if (!user) {
-      // res.status(400).json('Invalid token')
       throw Error('Invalid token')
     }
     await user.updatePassword(password);
@@ -68,4 +69,4 @@ const updatePassword = async (req, res) => {
   }
 }
 
-module.exports = { forLogin, forSignup, forgetPassword,updatePassword };
+module.exports = { forLogin, forSignup, forgetPassword, updatePassword };

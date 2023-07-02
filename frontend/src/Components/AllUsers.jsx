@@ -21,12 +21,20 @@ const AllUsers = () => {
 
 
     const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(true)
 
 
     const getUsers = async () => {
-        const response = await getallUsers();
-        // console.log(response);
-        setUser(response.data);
+        try {
+            setLoading(true)
+            const response = await getallUsers();
+            // console.log(response);
+            setUser(response.data);
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -40,8 +48,8 @@ const AllUsers = () => {
 
     return (
         <>
-            <Table className='table'>
-                {/* <TableHead>
+           {loading ? <div className="spinner"></div>: <Table className='table'>
+                <TableHead>
                     <TableRow>
                         <TableCell>ID</TableCell>
                         <TableCell>Name</TableCell>
@@ -50,7 +58,7 @@ const AllUsers = () => {
                         <TableCell>Phone</TableCell>
                         <TableCell>Actions</TableCell>
                     </TableRow>
-                </TableHead> */}
+                </TableHead>
                 <TableBody>
                     {
                         user.map((data) => (
@@ -70,7 +78,7 @@ const AllUsers = () => {
                         ))
                     }
                 </TableBody>
-            </Table>
+            </Table>}
         </>
     )
 }

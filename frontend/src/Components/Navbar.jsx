@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, Toolbar } from '@mui/material';
 import { NavLink, Outlet } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 
 const Navbar = () => {
+
     return (
         <>
             {/* <AppBar>

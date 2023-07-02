@@ -23,12 +23,16 @@ export const addUser = async (user) => {
 };
 
 export const editUser = async (id, user) => {
-  return await axios.put(`${url}/${id}`, user,{
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  try {
+    return await axios.put(`${url}/${id}`, user,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    throw Error('Error regarding edit function')
+  }
 };
 
 export const deleteUser = async (id) => {

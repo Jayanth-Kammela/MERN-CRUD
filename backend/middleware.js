@@ -10,7 +10,7 @@ const protectRoute = async (req, res, next) => {
   try {
     const { _id } = jwt.verify(token, process.env.SECRET);
     req.user = await todoSchema.findOne({ _id }).select("_id");
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (error) {
     res.status(401).json({ message: "Require is not authorzation" });
